@@ -1,0 +1,50 @@
+{% extends "index.html.twig" %}
+{% block content %}
+	<h6>{{title}}</h6>
+	<form id="pedidos" action="" method="post">
+
+		<label>Proveedor:</label>
+		<select name="idProveedor" id="selectcliente">
+			<option selected value="">Selecciona un proveedor</option>
+			{% for row in proveedor %}
+				<option value="{{row.getIdProveedor}}">{{row.getNombre|capitalize}}</option>
+			{% endfor %}
+		</select>
+		<label>Detalles:</label><input type="text" name="detalles">
+		<br>
+		<br>
+		<br>
+		<table id="customers" border='1'>
+			<tr>
+				<th>PRODUCTO</th>
+				<th>CANTIDAD</th>
+			</tr>
+			{% for row in productos %}
+
+				<tr>
+					<td>
+						<input type="hidden" name="idProducto{{ loop.index }}" value="{{row.getIdProducto}}">
+						<span>{{row.getNombre|capitalize}}</span>
+					</td>
+					<td><input type="number" name="cantidad{{ loop.index }}" min="0"></td>
+				</tr>
+			{% endfor %}
+		</table>
+		<br>
+		<br>
+		<br>
+		<input type="submit" value="Solicitar pedido">
+
+	</form>
+	<br>
+	<br>
+	<br>
+	<div id="customer" style="text-align:center">
+		<h2>
+			<a class="custom-btn" href="/">Volver</a>
+			<a class="custom-btn" href="/allpedidos">Listar todos los pedidos</a>
+		</h2>
+	</div>
+
+
+{% endblock %}

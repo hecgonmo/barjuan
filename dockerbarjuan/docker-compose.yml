@@ -1,0 +1,66 @@
+version: "3.1"
+services:
+
+    www:
+
+        container_name: www
+
+        build: .
+
+        volumes:
+            - ./www:/var/www/html
+
+        links:
+            - db
+
+        ports:
+            - 8000:80
+
+        networks:
+            - default
+        
+    db:
+
+        image: mysql:8.1
+        
+        container_name: db  #nombre del contenedor (servidor de base de datos normalmente usamos localhost para trabajar en local)
+        
+        environment:
+            - MYSQL_ROOT_PASSWORD=aev2 #contraseña de root
+            - MYSQL_DATABASE=barjuan #nombre de la base de datos
+            - MYSQL_USER=daw #usuario de la base de datos
+            - MYSQL_PASSWORD=aev2 #contraseña del usuario de la base de datos
+        
+        command: --default-authentication-plugin=mysql_native_password
+    
+        ports:
+            - 3306:3306
+        
+        volumes:
+            - ./dump:/docker-entrypoint-initdb.d
+            - ./conf:/etc/mysql/conf.d
+            - persistent:/var/lib/mysql
+        
+        networks:
+            - default
+        
+    phpmyadmin: 
+
+        image: phpmyadmin/phpmyadmin
+
+        container_name: phpmyadmin
+        
+        environment:
+            - MYSQL_ROOT_PASSWORD=aev2  #contraseña de root
+            - MYSQL_USER=root   #usuario de la base de datos
+            - MYSQL_PASSWORD=aev2   #contraseña del usuario de la base de datos
+
+        links:
+            - db:db
+
+        ports:
+            - 8001:80
+        
+        
+volumes:
+    persistent:

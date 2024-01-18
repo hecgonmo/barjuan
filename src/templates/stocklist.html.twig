@@ -1,0 +1,69 @@
+{% extends "index.html.twig" %}
+{% block content %}
+	{% if resultados is null %}
+		<h1>0 resultados</h1>
+		<h2>
+			<a class="custom-btn" href="/stock">Volver</a>
+		</h2>
+	{% else %}
+		{% if resultados|length == 1 %}
+			{% if resultados[0].getCantidad <= 0 %}
+				<h1>0 resultados en la fecha seleccionada</h1>
+				<a class="custom-btn" href="/stock">Volver</a>
+			{% else %}
+				<h6>{{title}}</h6>
+				<table id="customers" border='1'>
+					<tr>
+						<th>PRODUCTO</th>
+						<th>CANTIDAD</th>
+						<th>FECHA</th>
+
+					</tr>
+					{% if resultados[0].getCantidad > 0 %}
+						<tr>
+							<td>{{ resultados[0].getProductoId.getNombre|capitalize }}</td>
+							<td>{{ resultados[0].getCantidad|number_format(2) }}</td>
+							<td>{{ resultados[0].getFecha|date('d/m/Y H:i:s') }}</td>
+						</tr>
+					{% endif %}
+				</table>
+				<br>
+				<label>Filtrar por:</label>
+				<form method='post'>
+					<label for="fecha">Fecha:</label>
+					<input type="date" id="fecha" name="fecha" value="{{ fecha|date('Y-m-d') }}">
+					<input type="submit" value="Filtrar">
+				</form>
+				<br>
+				<a class="custom-btn" href="/">Volver</a>
+			{% endif %}
+		{% else %}
+			<h6>{{title}}</h6>
+			<table id="customers" border='1'>
+				<tr>
+					<th>PRODUCTO</th>
+					<th>CANTIDAD</th>
+					<th>FECHA</th>
+				</tr>
+				{% for row in resultados %}
+					{% if row.getCantidad > 0 %}
+						<tr>
+							<td>{{ row.getProductoId.getNombre|capitalize }}</td>
+							<td>{{ row.getCantidad|number_format(2) }}</td>
+							<td>{{ row.getFecha|date('d/m/Y H:i:s') }}</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</table>
+			<br>
+			<label>Filtrar por:</label>
+			<form method='post'>
+				<label for="fecha">Fecha:</label>
+				<input type="date" id="fecha" name="fecha" value="{{ fecha|date('Y-m-d') }}">
+				<input type="submit" value="Filtrar">
+			</form>
+			<br>
+			<a class="custom-btn" href="/">Volver</a>
+		{% endif %}
+	{% endif %}
+{% endblock %}

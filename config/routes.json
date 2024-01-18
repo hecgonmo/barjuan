@@ -1,0 +1,30 @@
+{
+  "/": {
+    "controller": "MainController",
+    "action": "main"
+  },
+  "/stock": {
+    "controller": "StockController",
+    "action": "listAll"
+  },
+  "/pedidos": {
+    "controller": "PedidosController",
+    "action": "form"
+  },
+  "/allpedidos": {
+    "controller": "PedidosController",
+    "action": "listAll"
+  },
+  "/comanda": {
+    "controller": "MainController",
+    "action": "readRequest"
+  },
+  "/entregaLineaComanda": {
+    "controller": "MainController",
+    "action": "readRequest"
+  },
+  "/ticket": {
+    "controller": "MainController",
+    "action": "readRequest"
+  }
+}

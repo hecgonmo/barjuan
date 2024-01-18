@@ -1,0 +1,27 @@
+{
+  "name": "daw-dwes/aev1",
+  "authors": [
+    {
+      "name": "hector-gonzalez-mora",
+      "email": "hegomo@floridauniversitaria.es"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "APP\\": "src/",
+      "Config\\": "config/"
+    }
+  },
+  "require": {
+    "twig/twig": "^3.4",
+    "twig/intl-extra":"3.7.1",
+    "twig/extra-bundle":"3.7.1",
+    "symfony/asset":"6.3.0",
+    "symfony/finder":"6.3.3",
+    "doctrine/orm": "^2.16.2",
+    "doctrine/dbal": "^3.2",
+    "symfony/cache": "^5.4",
+    "vlucas/phpdotenv": "^5.4",
+    "symfony/var-dumper": "^6.3"
+  }
+}
